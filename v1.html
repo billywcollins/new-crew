@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Umain US</title>
+<meta name="description" content="Prototype landing page for Umain in the US: a product, design and engineering house that shapes, ships and scales digital products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=Geist+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400..700&display=swap">
+<style>
+/* Layout: a black stage up top where the work runs as a draggable reel, white editorial sections below,
+   and one orange-red signal reserved for things that are live: the hero's full stop, the readout, the closing call. */
+:root{
+  --black:#0B0B0C;
+  --black-2:#17171A;
+  --white:#FFFFFF;
+  --fog:#EDEDEA;
+  --ink:#0B0B0C;
+  --ink-2:#5E5E63;
+  --ink-3:#8B8B90;
+  --on-black:#F4F4F2;
+  --on-black-2:#9C9CA2;
+  --on-black-3:#66666C;
+  --rule:rgba(11,11,12,.12);
+  --rule-dark:rgba(244,244,242,.14);
+  --signal:#FF4D1F;
+
+  --display:"Familjen Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --text:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+
+  --fs-hero:clamp(3.6rem,0.9rem + 11.6vw,12.5rem);
+  --fs-h2:clamp(2.6rem,1.3rem + 5.2vw,6rem);
+  --fs-xl:clamp(2rem,1rem + 4.2vw,5rem);
+  --fs-l:clamp(1.6rem,1rem + 2.3vw,3.1rem);
+  --fs-m:clamp(1.35rem,1.1rem + .8vw,1.8rem);
+
+  --maxw:1440px;
+  --gutter:clamp(16px,4vw,56px);
+  color-scheme:light;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--text);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.mono{font-family:var(--mono);font-size:.8125rem;line-height:1.5;letter-spacing:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.3em;border-radius:999px;border:1px solid currentColor;font-family:var(--text);font-weight:500;font-size:.95rem;line-height:1;text-decoration:none;cursor:pointer;background:transparent;transition:background-color .2s,color .2s,border-color .2s}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-solid-light{background:var(--on-black);color:var(--black);border-color:var(--on-black)}
+.btn-solid-light:hover{background:transparent;color:var(--on-black)}
+.btn-ghost-light{color:var(--on-black);border-color:var(--rule-dark)}
+.btn-ghost-light:hover{border-color:var(--on-black)}
+.btn-solid-dark{background:var(--black);color:var(--white);border-color:var(--black)}
+.btn-solid-dark:hover{background:transparent;color:var(--black)}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(11,11,12,.86);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);color:var(--on-black);border-bottom:1px solid transparent;transition:border-color .2s}
+.site-header.is-scrolled{border-bottom-color:var(--rule-dark)}
+.header-row{display:flex;align-items:center;gap:clamp(1rem,3vw,3rem);min-height:4.25rem}
+.wordmark{font-family:var(--display);font-weight:700;font-size:1.65rem;letter-spacing:-.045em;line-height:1;text-decoration:none}
+.wordmark .dot{color:var(--signal)}
+.nav{display:flex;gap:clamp(1.25rem,2.5vw,2.25rem);margin-left:auto}
+.nav a{text-decoration:none;font-size:.95rem;color:var(--on-black-2);transition:color .2s}
+.nav a:hover{color:var(--on-black)}
+.menu-btn{display:none;background:none;border:1px solid var(--rule-dark);border-radius:999px;padding:.6em 1em;font-size:.9rem;cursor:pointer}
+.mobile-nav{border-top:1px solid var(--rule-dark)}
+.mobile-nav ul{display:grid;padding-block:.75rem 1.5rem}
+.mobile-nav a{display:block;padding-block:.6rem;font-family:var(--display);font-weight:600;font-size:1.75rem;letter-spacing:-.03em;text-decoration:none}
+@media (max-width:860px){
+  .nav,.header-cta{display:none}
+  .menu-btn{display:inline-flex;margin-left:auto}
+}
+
+/* ---------- Stage: hero + reel ---------- */
+.stage{background:var(--black);color:var(--on-black);overflow:hidden}
+.hero{padding-block:clamp(2.75rem,7vw,6.5rem) clamp(3rem,6vw,5rem)}
+.hero-title{font-size:var(--fs-hero);line-height:.86;letter-spacing:-.055em;font-weight:700;margin-left:-.05em}
+.hero-title span{display:block}
+.hero-title .stop{display:inline;color:var(--signal)}
+.hero-foot{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(2.25rem,6vw,7rem);margin-top:clamp(2.5rem,5vw,4.5rem);align-items:end}
+.hero-lede{font-size:clamp(1.25rem,1rem + .9vw,1.75rem);line-height:1.3;letter-spacing:-.012em;max-width:30ch;color:var(--on-black)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+
+.readout{border-top:1px solid var(--on-black);padding-top:.9rem;min-width:0}
+.readout-head{display:flex;align-items:center;gap:.6rem;color:var(--on-black)}
+.live{width:.5rem;height:.5rem;border-radius:50%;background:var(--signal);flex:none;animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,77,31,.55)}70%{box-shadow:0 0 0 .55rem rgba(255,77,31,0)}100%{box-shadow:0 0 0 0 rgba(255,77,31,0)}}
+.readout dl{display:grid;margin-top:.6rem}
+.readout dl div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-block:.6rem;border-bottom:1px solid var(--rule-dark)}
+.readout dt{color:var(--on-black-2);font-size:.95rem}
+.readout dd{font-family:var(--mono);font-size:1rem;font-variant-numeric:tabular-nums;color:var(--on-black);text-align:right;white-space:nowrap}
+.readout .grade{margin-left:.6rem;color:var(--on-black-3);font-size:.75rem}
+.readout .grade.good{color:var(--on-black-2)}
+.readout-note{margin-top:.85rem;color:var(--on-black-2);font-size:.875rem;max-width:42ch}
+@media (max-width:820px){.hero-foot{grid-template-columns:1fr}.readout{max-width:30rem}}
+
+.reel{padding-bottom:clamp(3.5rem,7vw,6rem)}
+.reel-head{display:flex;align-items:center;gap:1rem 2rem;flex-wrap:wrap;padding-block:0 1.5rem}
+.reel-title{font-family:var(--display);font-weight:600;font-size:1.25rem;letter-spacing:-.02em}
+.reel-hint{color:var(--on-black-2)}
+@media (max-width:600px){.reel-hint{display:none}}
+.reel-ctrl{display:flex;align-items:center;gap:.5rem;margin-left:auto}
+.reel-count{color:var(--on-black-2);font-variant-numeric:tabular-nums;margin-right:.5rem}
+.reel-btn{width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid var(--rule-dark);background:transparent;cursor:pointer;display:grid;place-items:center;font-size:1.1rem;transition:border-color .2s,background-color .2s}
+.reel-btn:hover{border-color:var(--on-black)}
+.reel-btn:disabled{opacity:.35;cursor:default}
+.reel-track{--pad:max(var(--gutter),calc((100% - var(--maxw)) / 2 + var(--gutter)));display:flex;gap:clamp(.875rem,1.6vw,1.5rem);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:var(--pad);padding-inline:var(--pad);padding-bottom:1.25rem;scrollbar-width:thin;scrollbar-color:var(--on-black-3) transparent;cursor:grab}
+.reel-track.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.reel-track::-webkit-scrollbar{height:6px}
+.reel-track::-webkit-scrollbar-thumb{background:var(--on-black-3);border-radius:6px}
+
+/* ---------- Case cards ---------- */
+.case{flex:0 0 clamp(16.5rem,29vw,27rem);scroll-snap-align:start;display:flex;flex-direction:column;gap:1rem;min-width:0}
+.case-panel{position:relative;aspect-ratio:4/5;background:var(--field);color:var(--on-field);border-radius:6px;overflow:hidden;container-type:inline-size;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.case:hover .case-panel{transform:translateY(-4px)}
+.case-metric{position:absolute;top:7cqw;left:7cqw;right:7cqw;z-index:2}
+.case-metric b{display:block;font-family:var(--display);font-weight:700;font-size:17cqw;line-height:.88;letter-spacing:-.05em}
+.case-metric span{display:block;margin-top:2.6cqw;font-size:max(.8125rem,3.6cqw);line-height:1.3;max-width:24ch;opacity:.82}
+.case-meta{display:grid;gap:.35rem}
+.case-meta h3{font-size:1.35rem;letter-spacing:-.025em;line-height:1.1}
+.case-meta p{color:var(--on-black-2);font-size:.95rem;line-height:1.45}
+.case-meta .tags{color:var(--on-black-3);margin-top:.15rem}
+.case-index{color:var(--on-black-3);font-variant-numeric:tabular-nums}
+
+/* Illustrative device mocks, sized in container units so they scale with the card */
+.mock{position:absolute;inset:0;pointer-events:none}
+.phone{position:absolute;left:50%;bottom:0;width:46cqw;aspect-ratio:9/19;transform:translate(-50%,17%);background:#0D0D0F;border-radius:7.5cqw;padding:1.5cqw;box-shadow:0 5cqw 12cqw -4cqw rgba(0,0,0,.5)}
+.phone.right{left:66%}
+.scr{height:100%;border-radius:6cqw;overflow:hidden;background:var(--scr,#fff);color:var(--scr-ink,#0B0B0C);display:flex;flex-direction:column;gap:2.4cqw;padding:6.5cqw 3.6cqw 3cqw}
+.ui-island{display:block;flex:none;width:32%;height:2.6cqw;margin:-3.6cqw auto .8cqw;border-radius:2cqw;background:#0D0D0F}
+.ui-line{display:block;flex:none;height:2cqw;border-radius:1cqw;background:currentColor;opacity:.16}
+.ui-line.strong{opacity:.82;height:2.8cqw}
+.w30{width:30%}.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w80{width:80%}
+.ui-card{flex:none;border-radius:3cqw;padding:3.4cqw;display:flex;flex-direction:column;gap:2cqw;background:var(--accent);color:#fff}
+.ui-big{display:block;height:6.5cqw;width:52%;border-radius:1.2cqw;background:currentColor}
+.ui-meter{display:block;height:1.6cqw;border-radius:2cqw;background:rgba(255,255,255,.28);overflow:hidden}
+.ui-meter span{display:block;height:100%;width:var(--v,60%);background:#fff;border-radius:inherit}
+.ui-row{flex:none;display:flex;align-items:center;gap:2.2cqw;padding:2.2cqw;border-radius:2.4cqw;background:rgba(0,0,0,.05)}
+.dark-scr .ui-row{background:rgba(255,255,255,.07)}
+.ui-dot{flex:none;width:5.4cqw;height:5.4cqw;border-radius:1.4cqw;background:var(--c,var(--accent))}
+.ui-row .ui-line{flex:1}
+.ui-field{flex:none;height:7.5cqw;border-radius:2cqw;border:.4cqw solid rgba(0,0,0,.14);display:flex;align-items:center;padding-inline:2.4cqw}
+.ui-field .ui-line{flex:none}
+.ui-btn{flex:none;height:7.5cqw;border-radius:4cqw;background:var(--accent);margin-top:auto}
+.ui-tiles2{display:grid;grid-template-columns:1fr 1fr;gap:2cqw}
+.ui-tiles2 span{aspect-ratio:1;border-radius:2.4cqw;background:var(--c)}
+
+.pitch{flex:1;border-radius:2.4cqw;background:#1F5C38;position:relative;overflow:hidden;min-height:30cqw}
+.pitch::before{content:"";position:absolute;left:12%;right:12%;top:-1px;height:22%;border:.4cqw solid rgba(255,255,255,.35);border-top:0}
+.pitch::after{content:"";position:absolute;left:50%;bottom:-9cqw;width:18cqw;height:18cqw;transform:translateX(-50%);border:.4cqw solid rgba(255,255,255,.35);border-radius:50%}
+.pitch span{position:absolute;width:4.4cqw;height:4.4cqw;margin:-2.2cqw 0 0 -2.2cqw;border-radius:50%;background:#fff;box-shadow:0 0 0 .7cqw rgba(255,255,255,.18)}
+.pitch span.gk{background:#FF4D1F}
+
+.browser{position:absolute;left:9cqw;right:-7cqw;bottom:-7cqw;aspect-ratio:16/12;background:var(--scr,#fff);color:var(--scr-ink,#0B0B0C);border-radius:2.6cqw;overflow:hidden;box-shadow:0 5cqw 14cqw -4cqw rgba(0,0,0,.5)}
+.bchrome{height:5.4cqw;display:flex;gap:1.3cqw;align-items:center;padding-inline:2.6cqw;background:rgba(127,127,127,.12)}
+.bchrome span{width:1.7cqw;height:1.7cqw;border-radius:50%;background:currentColor;opacity:.25}
+.bscr{padding:3.6cqw;display:grid;gap:2.6cqw;align-content:start}
+.b-top{display:flex;align-items:center;gap:3cqw}
+.b-top .ui-line{flex:none}
+.b-search{height:6cqw;border-radius:3cqw;background:rgba(127,127,127,.16);display:flex;align-items:center;gap:1.6cqw;padding-inline:2.4cqw}
+.b-search i{width:2.6cqw;height:2.6cqw;border-radius:50%;background:var(--accent);flex:none}
+.b-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1.8cqw}
+.b-tiles span{aspect-ratio:3/4;border-radius:1cqw;background:var(--c)}
+.b-hero{height:20cqw;border-radius:2cqw;background:var(--accent);display:flex;flex-direction:column;justify-content:flex-end;gap:1.6cqw;padding:3cqw;color:#fff}
+.b-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw}
+.b-cards span{height:13cqw;border-radius:1.6cqw;background:rgba(127,127,127,.16)}
+.b-split{display:grid;grid-template-columns:22cqw 1fr;gap:3cqw}
+.b-side{display:grid;gap:2cqw;align-content:start}
+.b-rows{display:grid;gap:1.8cqw}
+.b-rows .ui-row{padding:1.8cqw}
+
+.watch{position:absolute;left:10cqw;bottom:13cqw;width:33cqw;aspect-ratio:1/1.2;border-radius:9cqw;background:#0D0D0F;padding:2.2cqw;box-shadow:0 5cqw 12cqw -4cqw rgba(0,0,0,.45)}
+.watch::before,.watch::after{content:"";position:absolute;left:22%;right:22%;height:12cqw;background:#1D1D20;z-index:-1}
+.watch::before{bottom:100%;border-radius:3cqw 3cqw 0 0}
+.watch::after{top:100%;border-radius:0 0 3cqw 3cqw}
+.wscr{height:100%;border-radius:7cqw;background:#000;display:grid;place-items:center}
+.ring{display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--c) 0 var(--v),rgba(255,255,255,.14) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3.4cqw),#000 calc(100% - 3.3cqw));mask:radial-gradient(farthest-side,transparent calc(100% - 3.4cqw),#000 calc(100% - 3.3cqw))}
+.ring-stack{position:relative;width:21cqw;aspect-ratio:1}
+.ring-stack .ring{position:absolute}
+.ring-stack .r1{inset:0}
+.ring-stack .r2{inset:4.4cqw}
+
+/* ---------- Generic sections ---------- */
+.section{padding-block:clamp(4.5rem,9vw,8.5rem)}
+.section-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.25rem 3rem;align-items:end;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
+.section-head h2{font-size:var(--fs-h2);line-height:.92;letter-spacing:-.05em}
+.section-head p{color:var(--ink-2);font-size:1.125rem;max-width:40ch}
+@media (max-width:860px){.section-head{grid-template-columns:1fr}}
+
+/* ---------- Intro statement ---------- */
+.intro{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:2rem clamp(2rem,6vw,7rem);align-items:end}
+.statement{font-family:var(--display);font-weight:600;font-size:var(--fs-l);line-height:1.08;letter-spacing:-.035em;text-wrap:pretty}
+.statement em{font-style:normal;text-decoration:underline;text-decoration-color:var(--signal);text-decoration-thickness:.07em;text-underline-offset:.12em}
+.intro-side{color:var(--ink-2);max-width:38ch}
+.intro-side p + p{margin-top:1rem}
+@media (max-width:900px){.intro{grid-template-columns:1fr}}
+
+/* ---------- Ready when you are (accordion) ---------- */
+.ready{border-top:1px solid var(--ink)}
+.ready details{border-bottom:1px solid var(--rule)}
+.ready summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem;align-items:center;padding-block:clamp(1.1rem,2vw,1.6rem);cursor:pointer;font-family:var(--display);font-weight:600;font-size:var(--fs-m);line-height:1.15;letter-spacing:-.03em;color:var(--ink-3);transition:color .2s}
+.ready summary::-webkit-details-marker{display:none}
+.ready summary:hover,.ready details[open] summary{color:var(--ink)}
+.ready .plus{position:relative;width:2.5rem;height:2.5rem;border-radius:50%;border:1px solid var(--rule);flex:none;transition:transform .3s,background-color .2s,border-color .2s}
+.ready .plus::before,.ready .plus::after{content:"";position:absolute;left:50%;top:50%;width:.85rem;height:1.5px;background:currentColor;transform:translate(-50%,-50%)}
+.ready .plus::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+.ready details[open] .plus{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.ready details[open] .plus::after{transform:translate(-50%,-50%) rotate(0deg)}
+.ready-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:1.25rem 3rem;padding:0 0 clamp(1.5rem,3vw,2.25rem)}
+.ready-body p{color:var(--ink-2);font-size:1.125rem;max-width:52ch}
+.proof{display:flex;flex-direction:column;gap:.15rem;border-left:2px solid var(--signal);padding-left:1rem;align-self:start}
+.proof b{font-family:var(--display);font-weight:600;font-size:1.125rem;letter-spacing:-.02em}
+.proof span{color:var(--ink-2);font-size:.95rem}
+@media (max-width:760px){.ready-body{grid-template-columns:1fr}}
+
+/* ---------- Beautifully performant ladder ---------- */
+.band-black{background:var(--black);color:var(--on-black)}
+.ladder-label{color:var(--on-black-2);margin-bottom:1.25rem}
+.ladder{border-top:1px solid var(--on-black)}
+.ladder li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,21rem);gap:.5rem 2.5rem;align-items:baseline;padding-block:clamp(.9rem,1.7vw,1.5rem);border-bottom:1px solid var(--rule-dark)}
+.ladder-line{font-family:var(--display);font-weight:700;font-size:var(--fs-xl);line-height:.96;letter-spacing:-.045em}
+.ladder-line .dim{color:var(--on-black-3);transition:color .25s}
+.ladder li:hover .dim{color:var(--on-black-2)}
+.ladder-proof{color:var(--on-black-2);font-size:.95rem;line-height:1.4}
+.ladder-proof b{display:block;color:var(--on-black);font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:-.015em}
+@media (max-width:760px){.ladder li{grid-template-columns:1fr}}
+
+/* ---------- Shape. Ship. Scale. ---------- */
+.band-fog{background:var(--fog)}
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,1.5rem)}
+.stage-card{background:var(--white);border-radius:6px;padding:clamp(1.25rem,2.4vw,2rem);display:flex;flex-direction:column;gap:1.1rem;min-width:0}
+.stage-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.stage-top .mono{color:var(--ink-2)}
+.stage-card h3{font-size:clamp(2.6rem,1.6rem + 3vw,4.25rem);line-height:.9;letter-spacing:-.05em}
+.stage-lead{font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:-.02em;line-height:1.2}
+.when{display:grid;border-top:1px solid var(--rule)}
+.when li{padding-block:.65rem;border-bottom:1px solid var(--rule);color:var(--ink-2);font-size:.98rem;line-height:1.45}
+.stage-card details{margin-top:auto}
+.stage-card summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-weight:500;font-size:.95rem;padding-block:.35rem}
+.stage-card summary::-webkit-details-marker{display:none}
+.stage-card summary::after{content:"+";font-family:var(--mono);transition:transform .2s}
+.stage-card details[open] summary::after{content:"−"}
+.services{display:grid;gap:.35rem;margin-top:.6rem}
+.services li{font-family:var(--mono);font-size:.8125rem;color:var(--ink-2);padding-left:1.4em;position:relative}
+.services li::before{content:"↳";position:absolute;left:0;color:var(--ink-3)}
+@media (max-width:960px){.stages{grid-template-columns:1fr}}
+
+.layers{margin-top:clamp(3.5rem,7vw,6rem)}
+.layers h3{font-size:var(--fs-m);letter-spacing:-.03em;line-height:1.1;max-width:24ch;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+.layer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem clamp(1rem,2.5vw,2.5rem);border-top:1px solid var(--ink);padding-top:1.25rem}
+.layer h4{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:-.02em;margin:0 0 .75rem}
+.layer li{padding-block:.4rem;border-bottom:1px solid var(--rule);font-size:.95rem;color:var(--ink-2)}
+@media (max-width:960px){.layer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.layer-grid{grid-template-columns:1fr}}
+
+/* ---------- Partners ---------- */
+.partners{padding-block:clamp(3.5rem,7vw,6rem)}
+.partners p{font-family:var(--display);font-weight:600;font-size:clamp(1.35rem,1rem + 1.5vw,2.25rem);letter-spacing:-.03em;line-height:1.12;max-width:26ch}
+.partner-list{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:1.25rem 2.5rem;margin-top:clamp(2rem,4vw,3.5rem);padding-top:clamp(1.5rem,3vw,2.5rem);border-top:1px solid var(--rule-dark)}
+.partner-list li{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,1rem + 2.6vw,3.25rem);letter-spacing:-.04em;line-height:1;color:var(--on-black)}
+.partner-list li:nth-child(even){color:var(--on-black-2)}
+
+/* ---------- Values ---------- */
+.values-words{display:flex;flex-wrap:wrap;gap:0 .35em;font-family:var(--display);font-weight:700;font-size:var(--fs-xl);line-height:1.02;letter-spacing:-.045em}
+.value-btn{appearance:none;background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;color:var(--ink-3);cursor:pointer;transition:color .2s}
+.value-btn:hover{color:var(--ink-2)}
+.value-btn[aria-selected="true"]{color:var(--ink)}
+.value-panel{margin-top:clamp(1.5rem,3vw,2.5rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:1rem 3rem;border-top:1px solid var(--rule);padding-top:1.25rem}
+.value-panel .mono{color:var(--ink-2)}
+.value-panel p:last-child{font-size:clamp(1.15rem,1rem + .6vw,1.5rem);line-height:1.35;letter-spacing:-.01em;max-width:40ch}
+@media (max-width:760px){.value-panel{grid-template-columns:1fr}}
+
+/* ---------- Call to action ---------- */
+.cta{background:var(--signal);color:var(--black)}
+.cta h2{font-size:var(--fs-hero);line-height:.86;letter-spacing:-.055em;margin-left:-.04em;max-width:9ch}
+.cta-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem 3rem;margin-top:clamp(2.5rem,5vw,4rem);align-items:end}
+.cta-grid > p{font-size:clamp(1.2rem,1rem + .7vw,1.6rem);line-height:1.3;max-width:28ch}
+.email-row{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem}
+.email{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,1rem + 2.3vw,3rem);letter-spacing:-.035em;line-height:1;-webkit-user-select:all;user-select:all;word-break:break-all}
+.copy-status{min-height:1.5em;margin-top:.75rem}
+.offices{margin-top:1.5rem}
+@media (max-width:860px){.cta-grid{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+.site-footer{background:var(--black);color:var(--on-black-2);padding-block:2.5rem calc(2.5rem + env(safe-area-inset-bottom,0px))}
+.footer-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:1.25rem 3rem}
+.footer-row .wordmark{color:var(--on-black)}
+.footer-nav{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem}
+.footer-nav a{text-decoration:none;font-size:.95rem}
+.footer-nav a:hover{color:var(--on-black)}
+.footer-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem 2rem;margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--rule-dark)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="wrap header-row">
+    <a class="wordmark" href="#top" aria-label="Umain, back to top">umain<span class="dot">.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#approach">Approach</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-solid-light header-cta" href="#contact">Start a project <span class="arr" aria-hidden="true">→</span></a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <ul class="wrap">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#contact">Start a project</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<div class="stage">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <h1 class="hero-title" id="hero-title"><span>Beautifully</span><span>performant<span class="stop">.</span></span></h1>
+      <div class="hero-foot">
+        <div>
+          <p class="hero-lede">We shape, ship and scale digital products — across your portfolio, your platforms and the teams that run them.</p>
+          <div class="hero-actions">
+            <a class="btn btn-solid-light" href="#work">See the work <span class="arr" aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost-light" href="#contact">Start a project</a>
+          </div>
+        </div>
+        <aside class="readout" aria-labelledby="readout-title">
+          <p class="readout-head mono" id="readout-title"><span class="live" aria-hidden="true"></span>This page, measured just now</p>
+          <dl>
+            <div><dt id="m-fcp-label">First paint</dt><dd id="m-fcp">—</dd></div>
+            <div><dt id="m-lcp-label">Largest paint</dt><dd id="m-lcp">—</dd></div>
+            <div><dt>Layout shift</dt><dd id="m-cls">—</dd></div>
+            <div><dt>Page weight</dt><dd id="m-kb">—</dd></div>
+          </dl>
+          <p class="readout-note">Real numbers from your browser. Everything we ship gets held to the same standard.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="reel" id="work" aria-labelledby="reel-title">
+    <div class="wrap reel-head">
+      <h2 class="reel-title" id="reel-title">Selected work</h2>
+      <p class="reel-hint mono">Drag or scroll to explore</p>
+      <div class="reel-ctrl">
+        <p class="reel-count mono" aria-live="polite"><span id="reel-pos">01</span> / 08</p>
+        <button class="reel-btn" id="reel-prev" type="button" aria-label="Previous project">←</button>
+        <button class="reel-btn" id="reel-next" type="button" aria-label="Next project">→</button>
+      </div>
+    </div>
+
+    <div class="reel-track" id="reel" tabindex="0" role="region" aria-label="Selected work, scrolls sideways">
+
+      <article class="case" style="--field:#D3262D;--on-field:#FFFFFF;--accent:#9E1A20">
+        <div class="case-panel">
+          <p class="case-metric"><b>1 in 3</b><span>in-store transactions run through the app within a year</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="phone"><div class="scr">
+              <span class="ui-island"></span>
+              <span class="ui-line strong w50"></span>
+              <div class="ui-card"><span class="ui-line w40" style="opacity:.6"></span><span class="ui-big"></span><span class="ui-meter" style="--v:68%"><span></span></span></div>
+              <div class="ui-row"><span class="ui-dot" style="--c:#D3262D"></span><span class="ui-line"></span></div>
+              <div class="ui-row"><span class="ui-dot" style="--c:#F2A900"></span><span class="ui-line"></span></div>
+              <div class="ui-row"><span class="ui-dot" style="--c:#D3262D"></span><span class="ui-line"></span></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">01</p>
+          <h3>Kwik Trip</h3>
+          <p>Native loyalty apps for iOS and Android that landed 150% above their adoption goal.</p>
+          <p class="tags mono">Mobile · Loyalty · Data</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#2443B5;--on-field:#FFFFFF;--accent:#2443B5">
+        <div class="case-panel">
+          <p class="case-metric"><b>+1,200%</b><span>audience growth in the first year</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="browser"><div class="bchrome"><span></span><span></span><span></span></div>
+              <div class="bscr">
+                <div class="b-split">
+                  <div class="b-side"><span class="ui-line strong w80"></span><span class="ui-line w60"></span><span class="ui-line w70"></span><span class="ui-line w50"></span></div>
+                  <div class="b-rows">
+                    <div class="ui-row"><span class="ui-dot"></span><span class="ui-line"></span></div>
+                    <div class="ui-row"><span class="ui-dot" style="--c:#7FA0FF"></span><span class="ui-line"></span></div>
+                    <div class="ui-row"><span class="ui-dot"></span><span class="ui-line"></span></div>
+                    <div class="ui-row"><span class="ui-dot" style="--c:#7FA0FF"></span><span class="ui-line"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">02</p>
+          <h3>Allstate</h3>
+          <p>Digital Locker, rebuilt on new middleware with redesigned web and mobile apps.</p>
+          <p class="tags mono">Platform · Product strategy</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#241D18;--on-field:#F4EEE6;--accent:#C9A15A;--scr:#121011;--scr-ink:#F4EEE6">
+        <div class="case-panel">
+          <p class="case-metric"><b>4+ min</b><span>average session, exploring 800,000 artworks</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="browser"><div class="bchrome"><span></span><span></span><span></span></div>
+              <div class="bscr">
+                <div class="b-search"><i></i><span class="ui-line w60"></span></div>
+                <div class="b-tiles">
+                  <span style="--c:#7A4B2A"></span><span style="--c:#C9B79C"></span><span style="--c:#3E2C22"></span><span style="--c:#B98A4E"></span>
+                  <span style="--c:#5B6B4E"></span><span style="--c:#8C3B2A"></span><span style="--c:#D8CBB4"></span><span style="--c:#4A3A2E"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">03</p>
+          <h3>Rijksmuseum</h3>
+          <p>An AI-driven collections explorer. Two Webby Awards for best UI.</p>
+          <p class="tags mono">AI · Web</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#DAD7D0;--on-field:#0B0B0C;--accent:#1C2B3A">
+        <div class="case-panel">
+          <p class="case-metric"><b>+87%</b><span>organic traffic on key category pages</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="browser"><div class="bchrome"><span></span><span></span><span></span></div>
+              <div class="bscr">
+                <div class="b-top"><span class="ui-line strong w30"></span><span class="ui-line w30"></span></div>
+                <div class="b-hero"><span class="ui-line strong w40" style="opacity:.95"></span><span class="ui-line w30" style="opacity:.5"></span></div>
+                <div class="b-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">04</p>
+          <h3>Volvo Cars</h3>
+          <p>A data-led content foundation running across 80+ markets.</p>
+          <p class="tags mono">Data · Content platform</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#A3CDF0;--on-field:#0B0B0C;--accent:#0A5DB8">
+        <div class="case-panel">
+          <p class="case-metric"><b>Day one</b><span>Apple Watch launch partner</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="watch"><div class="wscr">
+              <div class="ring-stack"><span class="ring r1" style="--c:#5EC2FF;--v:78%"></span><span class="ring r2" style="--c:#7CF0B6;--v:56%"></span></div>
+            </div></div>
+            <div class="phone right"><div class="scr">
+              <span class="ui-island"></span>
+              <span class="ui-line strong w60"></span>
+              <div class="ui-card"><span class="ui-line w50" style="opacity:.6"></span><span class="ui-big"></span></div>
+              <div class="ui-row"><span class="ui-dot" style="--c:#5EC2FF"></span><span class="ui-line"></span></div>
+              <div class="ui-row"><span class="ui-dot" style="--c:#7CF0B6"></span><span class="ui-line"></span></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">05</p>
+          <h3>BlueCross BlueShield</h3>
+          <p>Centered, a wellness app for iOS and watchOS, featured at Apple’s keynote.</p>
+          <p class="tags mono">Mobile · Wearables · Health</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#EEF0F3;--on-field:#0B0B0C;--accent:#D81939">
+        <div class="case-panel">
+          <p class="case-metric"><b>10x</b><span>return on investment from experimentation</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="phone"><div class="scr">
+              <span class="ui-island"></span>
+              <span class="ui-line strong w40"></span>
+              <div class="ui-field"><span class="ui-line w50"></span></div>
+              <div class="ui-field"><span class="ui-line w60"></span></div>
+              <div class="ui-field"><span class="ui-line w40"></span></div>
+              <span class="ui-btn"></span>
+            </div></div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">06</p>
+          <h3>Norwegian</h3>
+          <p>A booking funnel rebuilt through testing, worth an estimated NOK 500M a year.</p>
+          <p class="tags mono">E-commerce · Experimentation</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#0F5A61;--on-field:#FFFFFF;--accent:#E8452C">
+        <div class="case-panel">
+          <p class="case-metric"><b>500K+</b><span>downloads in the first three months</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="phone"><div class="scr">
+              <span class="ui-island"></span>
+              <span class="ui-line strong w50"></span>
+              <div class="ui-card"><span class="ui-line w40" style="opacity:.6"></span><span class="ui-big"></span><span class="ui-meter" style="--v:42%"><span></span></span></div>
+              <div class="ui-tiles2"><span style="--c:#F3E3D3"></span><span style="--c:#D9ECEE"></span><span style="--c:#E9E6F2"></span><span style="--c:#F6EBC8"></span></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">07</p>
+          <h3>PetSmart</h3>
+          <p>iOS and Android loyalty apps, built in six months and 107% above goal.</p>
+          <p class="tags mono">Mobile · Loyalty</p>
+        </div>
+      </article>
+
+      <article class="case" style="--field:#0F1E3B;--on-field:#FFFFFF;--accent:#FF4D1F;--scr:#0B1222;--scr-ink:#FFFFFF">
+        <div class="case-panel">
+          <p class="case-metric"><b>+172%</b><span>new users on announcement day</span></p>
+          <div class="mock" aria-hidden="true">
+            <div class="phone"><div class="scr dark-scr">
+              <span class="ui-island" style="background:#000"></span>
+              <span class="ui-line strong w50"></span>
+              <div class="pitch">
+                <span class="gk" style="left:50%;top:90%"></span>
+                <span style="left:18%;top:70%"></span><span style="left:39%;top:73%"></span><span style="left:61%;top:73%"></span><span style="left:82%;top:70%"></span>
+                <span style="left:28%;top:48%"></span><span style="left:50%;top:52%"></span><span style="left:72%;top:48%"></span>
+                <span style="left:22%;top:24%"></span><span style="left:50%;top:18%"></span><span style="left:78%;top:24%"></span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+        <div class="case-meta">
+          <p class="case-index mono">08</p>
+          <h3>U.S. Soccer</h3>
+          <p>Starting XI, a pick-your-lineup feature in the official app. A third of users built one.</p>
+          <p class="tags mono">Mobile · Sports</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+<section class="section" aria-label="What we do">
+  <div class="wrap intro">
+    <p class="statement">Umain is a product, design and engineering house. We <em>build something new</em>, <em>make something better</em>, or help you <em>shape what’s next</em>.</p>
+    <div class="intro-side">
+      <p>From one app to a whole portfolio, we take products from first idea to millions of pockets, then keep them performing long after launch.</p>
+      <p>We do it with people, agents, or both. Whatever gets you the best outcome.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="ready-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="ready-title">Ready when you are.</h2>
+      <p>The moments teams usually call us. Open one to see how we’d start.</p>
+    </div>
+    <div class="ready">
+      <details name="ready" open>
+        <summary>You want to build once and use it everywhere.<span class="plus" aria-hidden="true"></span></summary>
+        <div class="ready-body">
+          <p>Every brand, market and acquisition tends to add another version of the same thing. We help you bring it together, so new features reach every part of the business and each team can still move on its own.</p>
+          <p class="proof"><b>Volvo Cars</b><span>One content foundation across 80+ markets</span></p>
+        </div>
+      </details>
+      <details name="ready">
+        <summary>You’re ready to put AI in front of real customers.<span class="plus" aria-hidden="true"></span></summary>
+        <div class="ready-body">
+          <p>The demo was the easy part. We take AI from prototype to production with data you can trust, and help your teams work with it day to day so it keeps getting better after launch.</p>
+          <p class="proof"><b>Rijksmuseum</b><span>An AI-driven explorer for 800,000 artworks</span></p>
+        </div>
+      </details>
+      <details name="ready">
+        <summary>You’re ready to grow faster than your tech will let you.<span class="plus" aria-hidden="true"></span></summary>
+        <div class="ready-body">
+          <p>The systems that got you here aren’t always the ones that will take you further. We move you onto a modern foundation you own, in stages, so the business keeps running and license costs stop deciding what’s possible.</p>
+          <p class="proof"><b>Allstate</b><span>Digital Locker, rebuilt on new middleware</span></p>
+        </div>
+      </details>
+      <details name="ready">
+        <summary>You need to know what’s worth building next.<span class="plus" aria-hidden="true"></span></summary>
+        <div class="ready-body">
+          <p>You’re shaping the next five years of your product portfolio. We help you decide what belongs in it, what’s worth the investment, and when to make each move.</p>
+          <p class="proof"><b>Norwegian</b><span>Every change tested against revenue</span></p>
+        </div>
+      </details>
+      <details name="ready">
+        <summary>You have a goal, but no clear place to start.<span class="plus" aria-hidden="true"></span></summary>
+        <div class="ready-body">
+          <p>One product or a portfolio of them. We start with the business goal and work back to the first thing worth shipping, then ship it.</p>
+          <p class="proof"><b>Kwik Trip</b><span>From loyalty goal to one in three transactions</span></p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section band-black" aria-labelledby="ladder-title">
+  <div class="wrap">
+    <h2 class="ladder-label mono" id="ladder-title">What beautifully performant means</h2>
+    <ul class="ladder">
+      <li><p class="ladder-line"><span class="dim">In how</span> we work.</p><p class="ladder-proof"><b>Electrolux</b>An embedded team through the move to direct-to-consumer</p></li>
+      <li><p class="ladder-line"><span class="dim">In how</span> it works.</p><p class="ladder-proof"><b>W.R. Berkley</b>Quoting, reporting and client management in one agent portal</p></li>
+      <li><p class="ladder-line"><span class="dim">In how</span> it feels.</p><p class="ladder-proof"><b>Rijksmuseum</b>Two Webby Awards for best UI</p></li>
+      <li><p class="ladder-line"><span class="dim">In how</span> it runs.</p><p class="ladder-proof"><b>Polestar</b>Real-time 3D in the browser, twice the conversion</p></li>
+      <li><p class="ladder-line"><span class="dim">In how</span> it scales.</p><p class="ladder-proof"><b>Volvo Cars</b>One content foundation, 80+ markets, 7+ major launches</p></li>
+      <li><p class="ladder-line"><span class="dim">In how it</span> moves your business.</p><p class="ladder-proof"><b>Norwegian</b>10x return, an estimated NOK 500M a year</p></li>
+      <li><p class="ladder-line"><span class="dim">For the</span> long run.</p><p class="ladder-proof"><b>Spotify</b>Design partner since 2016</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section band-fog" id="approach" aria-labelledby="approach-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="approach-title">Shape. Ship. Scale.</h2>
+      <p>Bring us in at the stage you’re at. Each one stands on its own and sets up the next.</p>
+    </div>
+
+    <div class="stages">
+      <article class="stage-card">
+        <div class="stage-top"><span class="mono">01</span><span class="mono">Before you commit</span></div>
+        <h3>Shape</h3>
+        <p class="stage-lead">Clarity before commitment.</p>
+        <ul class="when">
+          <li>Your leadership needs results and doesn’t know where to start.</li>
+          <li>You have a new product idea that needs to prove itself.</li>
+          <li>You need an architecture built for global scale from day one.</li>
+        </ul>
+        <details>
+          <summary>What’s included</summary>
+          <ul class="services">
+            <li>Research, insights and opportunity mapping</li>
+            <li>Product strategy</li>
+            <li>Business case, value sizing and roadmap prioritization</li>
+            <li>Concept and UX/UI direction</li>
+            <li>Technical discovery and architecture direction</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="stage-card">
+        <div class="stage-top"><span class="mono">02</span><span class="mono">While you build</span></div>
+        <h3>Ship</h3>
+        <p class="stage-lead">Build it right, build it fast.</p>
+        <ul class="when">
+          <li>You’re ready to build, or stuck in a build that isn’t going well.</li>
+          <li>Your team needs experienced partners to speed up delivery.</li>
+          <li>You need craft and organizational momentum at the same time.</li>
+        </ul>
+        <details>
+          <summary>What’s included</summary>
+          <ul class="services">
+            <li>UX/UI and digital product design</li>
+            <li>App and web development</li>
+            <li>Platform, CMS and e-commerce builds</li>
+            <li>AI-enabled features and workflows</li>
+            <li>Content production</li>
+            <li>Release and launch support</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="stage-card">
+        <div class="stage-top"><span class="mono">03</span><span class="mono">After you launch</span></div>
+        <h3>Scale</h3>
+        <p class="stage-lead">Ready for the main stage.</p>
+        <ul class="when">
+          <li>You need to prove your product can carry a global audience.</li>
+          <li>An AI prototype is ready to become a real product.</li>
+          <li>Your product isn’t performing, technically, experientially or commercially.</li>
+        </ul>
+        <details>
+          <summary>What’s included</summary>
+          <ul class="services">
+            <li>Analytics and measurement</li>
+            <li>Experimentation and A/B testing</li>
+            <li>CRO and continuous UX optimization</li>
+            <li>SEO and generative search optimization</li>
+            <li>Operating model and team set-up</li>
+          </ul>
+        </details>
+      </article>
+    </div>
+
+    <div class="layers">
+      <h3>One team across your portfolio, products, platforms and people.</h3>
+      <div class="layer-grid">
+        <div class="layer">
+          <h4>Portfolio</h4>
+          <ul><li>Opportunity mapping</li><li>Value sizing</li><li>Roadmap prioritization</li><li>Investment timing</li></ul>
+        </div>
+        <div class="layer">
+          <h4>Products</h4>
+          <ul><li>Mobile apps for iOS and Android</li><li>Web applications</li><li>Connected device interfaces</li><li>AI-powered products</li><li>Loyalty and rewards</li></ul>
+        </div>
+        <div class="layer">
+          <h4>Platforms</h4>
+          <ul><li>Back-end APIs and services</li><li>Internal and operational tools</li><li>Data and analytics infrastructure</li><li>Design systems</li><li>CMS and commerce</li></ul>
+        </div>
+        <div class="layer">
+          <h4>Teams</h4>
+          <ul><li>Operating model and team set-up</li><li>Senior partners inside your squads</li><li>Agentic workflows alongside people</li><li>Release and launch support</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners band-black" aria-label="Platform partners">
+  <div class="wrap">
+    <p>Proud partners to the best challenger companies in e&#8209;commerce and CMS.</p>
+    <ul class="partner-list">
+      <li>Sanity</li>
+      <li>Directus</li>
+      <li>Geins</li>
+      <li>Hygraph</li>
+      <li>inRiver</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="studio" aria-labelledby="studio-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="studio-title">How we show up.</h2>
+      <p>Since 2001. More than 100 people across product strategy, design and engineering, in Chicago, Stockholm, Oslo and London.</p>
+    </div>
+    <div class="values-words" role="tablist" aria-label="How we show up">
+      <button class="value-btn" role="tab" id="v-0" aria-selected="true" aria-controls="value-panel" data-copy="We have a point of view and we stand behind it, because we’ve done the work to earn it.">Conviction.</button>
+      <button class="value-btn" role="tab" id="v-1" aria-selected="false" aria-controls="value-panel" tabindex="-1" data-copy="We’re thorough and pragmatic. We think things through so the decisions hold up.">Rigor.</button>
+      <button class="value-btn" role="tab" id="v-2" aria-selected="false" aria-controls="value-panel" tabindex="-1" data-copy="We’re invested in the outcome and in the people using what we build. Humble about what we don’t know, positive about what we can solve.">Care.</button>
+      <button class="value-btn" role="tab" id="v-3" aria-selected="false" aria-controls="value-panel" tabindex="-1" data-copy="We simplify. We cut what doesn’t matter and prioritize ruthlessly, so the important things get done well.">Clarity.</button>
+      <button class="value-btn" role="tab" id="v-4" aria-selected="false" aria-controls="value-panel" tabindex="-1" data-copy="We show up, move fast and keep things moving. Ideas are only as good as what we do with them.">Momentum.</button>
+    </div>
+    <div class="value-panel" id="value-panel" role="tabpanel" aria-labelledby="v-0">
+      <p class="mono" id="value-name">Conviction</p>
+      <p id="value-copy">We have a point of view and we stand behind it, because we’ve done the work to earn it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section cta" id="contact" aria-labelledby="cta-title">
+  <div class="wrap">
+    <h2 id="cta-title">Got something to ship?</h2>
+    <div class="cta-grid">
+      <p>One product or a whole portfolio. Tell us what you’re working on and we’ll tell you where we’d start.</p>
+      <div>
+        <div class="email-row">
+          <span class="email" id="email">hi@umain.com</span>
+          <button class="btn btn-solid-dark" type="button" id="copy-email">Copy email</button>
+        </div>
+        <p class="copy-status mono" id="copy-status" aria-live="polite"></p>
+        <p class="offices mono">Chicago · Stockholm · Oslo · London</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <a class="wordmark" href="#top" aria-label="Umain, back to top">umain<span class="dot" style="color:var(--signal)">.</span></a>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#work">Work</a>
+        <a href="#approach">Approach</a>
+        <a href="#studio">Studio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-base mono">
+      <p>Umain is part of Eidra.</p>
+      <p>© 2026 Umain · Prototype for internal review</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Header border once the page scrolls */
+  var header = document.querySelector('.site-header');
+  function onScroll(){ header.classList.toggle('is-scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* Mobile menu */
+  var menuBtn = document.getElementById('menu-btn');
+  var mobileNav = document.getElementById('mobile-nav');
+  menuBtn.addEventListener('click', function(){
+    var open = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', String(!open));
+    menuBtn.textContent = open ? 'Menu' : 'Close';
+    mobileNav.hidden = open;
+  });
+  mobileNav.addEventListener('click', function(e){
+    if (e.target.closest('a')) { mobileNav.hidden = true; menuBtn.setAttribute('aria-expanded','false'); menuBtn.textContent = 'Menu'; }
+  });
+
+  /* Work reel: drag, arrows, counter */
+  var reel = document.getElementById('reel');
+  var cards = reel.querySelectorAll('.case');
+  var pos = document.getElementById('reel-pos');
+  var prev = document.getElementById('reel-prev');
+  var next = document.getElementById('reel-next');
+  function step(){ var c = cards[0]; var gap = parseFloat(getComputedStyle(reel).columnGap) || 16; return c.getBoundingClientRect().width + gap; }
+  function update(){
+    var max = reel.scrollWidth - reel.clientWidth;
+    var i = reel.scrollLeft >= max - 2 ? cards.length - 1 : Math.round(reel.scrollLeft / step());
+    i = Math.max(0, Math.min(cards.length - 1, i));
+    pos.textContent = String(i + 1).padStart(2, '0');
+    prev.disabled = reel.scrollLeft <= 2;
+    next.disabled = reel.scrollLeft >= max - 2;
+  }
+  reel.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  prev.addEventListener('click', function(){ reel.scrollBy({left:-step(), behavior: reduce ? 'auto' : 'smooth'}); });
+  next.addEventListener('click', function(){ reel.scrollBy({left: step(), behavior: reduce ? 'auto' : 'smooth'}); });
+  reel.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+  });
+  var dragging = false, startX = 0, startLeft = 0;
+  reel.addEventListener('pointerdown', function(e){
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    dragging = true; startX = e.clientX; startLeft = reel.scrollLeft;
+    reel.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    reel.scrollLeft = startLeft - (e.clientX - startX);
+  });
+  window.addEventListener('pointerup', function(){
+    if (!dragging) return;
+    dragging = false; reel.classList.remove('dragging');
+  });
+  update();
+
+  /* Values */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.value-btn'));
+  var vName = document.getElementById('value-name');
+  var vCopy = document.getElementById('value-copy');
+  var vPanel = document.getElementById('value-panel');
+  function select(t, focus){
+    tabs.forEach(function(x){ var on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+    vName.textContent = t.textContent.replace('.', '');
+    vCopy.textContent = t.dataset.copy;
+    vPanel.setAttribute('aria-labelledby', t.id);
+    if (focus) t.focus();
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ select(t); });
+    t.addEventListener('mouseenter', function(){ if (window.matchMedia('(hover: hover)').matches) select(t); });
+    t.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (n) { e.preventDefault(); select(n, true); }
+    });
+  });
+
+  /* Copy email */
+  var copyBtn = document.getElementById('copy-email');
+  var status = document.getElementById('copy-status');
+  copyBtn.addEventListener('click', function(){
+    var text = document.getElementById('email').textContent;
+    function fallback(){
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      status.textContent = 'Selected. Press ⌘C or Ctrl+C to copy.';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ status.textContent = 'Copied to your clipboard.'; }, fallback);
+    } else { fallback(); }
+  });
+
+  /* Live performance readout, measured in the viewer's browser */
+  function $(id){ return document.getElementById(id); }
+  function secs(ms){ return (ms / 1000).toFixed(2) + ' s'; }
+  function grade(v, good, ok){ return v <= good ? 'good' : (v <= ok ? 'fair' : 'slow'); }
+  function show(el, value, fmt, g){
+    var html = function(v){ return fmt(v) + (g ? '<span class="grade ' + g + '">' + g + '</span>' : ''); };
+    if (reduce) { el.innerHTML = html(value); return; }
+    var t0 = performance.now(), d = 650;
+    (function frame(now){
+      var p = Math.min(1, (now - t0) / d), e = 1 - Math.pow(1 - p, 3);
+      el.innerHTML = html(value * e);
+      if (p < 1) requestAnimationFrame(frame);
+    })(t0);
+  }
+  var fcp = null, lcp = null, cls = 0, lcpOK = false, clsOK = false;
+  try { new PerformanceObserver(function(list){ list.getEntries().forEach(function(e){ if (e.name === 'first-contentful-paint') fcp = e.startTime; }); }).observe({type:'paint', buffered:true}); } catch(e){}
+  try { new PerformanceObserver(function(list){ var es = list.getEntries(); if (es.length) lcp = es[es.length - 1].startTime; }).observe({type:'largest-contentful-paint', buffered:true}); lcpOK = true; } catch(e){}
+  try { new PerformanceObserver(function(list){ list.getEntries().forEach(function(e){ if (!e.hadRecentInput) cls += e.value; }); }).observe({type:'layout-shift', buffered:true}); clsOK = true; } catch(e){}
+
+  function report(){
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    var loaded = nav && nav.loadEventStart ? nav.loadEventStart : performance.now();
+    if (fcp != null) show($('m-fcp'), fcp, secs, grade(fcp, 1800, 3000));
+    else { $('m-fcp-label').textContent = 'Content ready'; show($('m-fcp'), nav && nav.domContentLoadedEventEnd ? nav.domContentLoadedEventEnd : loaded, secs, null); }
+    if (lcpOK && lcp != null) { show($('m-lcp'), lcp, secs, grade(lcp, 2500, 4000)); }
+    else { $('m-lcp-label').textContent = 'Fully loaded'; show($('m-lcp'), loaded, secs, null); }
+    if (clsOK) show($('m-cls'), cls, function(v){ return v.toFixed(3); }, grade(cls, 0.1, 0.25));
+    else { $('m-cls').closest('div').hidden = true; }
+    var kb = new Blob([document.documentElement.outerHTML]).size / 1024;
+    show($('m-kb'), kb, function(v){ return Math.round(v) + ' kB'; }, null);
+  }
+  if (document.readyState === 'complete') setTimeout(report, 400);
+  else window.addEventListener('load', function(){ setTimeout(report, 400); });
+})();
+</script>
+</body>
+</html>
